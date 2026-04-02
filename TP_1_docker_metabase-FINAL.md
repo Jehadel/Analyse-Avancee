@@ -8,13 +8,13 @@ Dernière mise à jour : avril 2026
 
 ---
 
-Objecitf :
+**Objectif :**
 
-Ce TP vise à vous guider dans la mise en œuvre d’images PosgreSQL et Metabaise via Docker Compose, à vous montrer une procédure simple d’ingetion de données en base et la création d’un dashboard à l’aide de Metabase. Vous saurez ainsi mettre en œuvre un environnement BI complet.
+Ce TP vise à vous guider dans la mise en œuvre de conteneurs basés sur des images PosgreSQL et Metabase via Docker Compose, à vous montrer une procédure simple d’ingestion de données en base et la création d’un dashboard à l’aide de Metabase. Vous saurez ainsi mettre en œuvre un (modeste) environnement BI complet parfait pour de petits projets (petites équipes, TPE/PME, associations…).
 
 ## ⚠️ Prérequis
 
-**Avant de commencer**, assurez-vous d'avoir complété le [Guide d'installation des prérequis (TP 0)](guide_installation_prerequis.md).
+**Avant de commencer**, assurez-vous d'avoir complété le [Guide d'installation des prérequis (TP 0)](./TP_0_installation_prerequis-FINAL.md).
 
 Vérification rapide :
 ```bash
