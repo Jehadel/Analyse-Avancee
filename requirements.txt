@@ -1,0 +1,14 @@
+# Requirements pour la formation Business Intelligence
+# Installation : pip install -r requirements.txt
+
+# Data manipulation
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Database connectivity
+SQLAlchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# Optionnel mais utile pour certains exercices
+matplotlib>=3.7.0
+seaborn>=0.12.0
