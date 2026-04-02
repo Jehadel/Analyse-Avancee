@@ -258,7 +258,8 @@ On va lancer les conteneurs petit à petit pour vérifier que tout fonctionne, m
     restaurant | bi_user | UTF8     | libc            | en_US.utf8  | en_US.utf8  |
    ```
 
-   
+
+5. Si tout se passe bien pour Postgres, lancez ensuite le conteneur de Metabase : `docker compose up -d metabase`
 
 ### Si ça ne marche pas ?
 
@@ -438,6 +439,63 @@ print("  Table : tips")
 ```
 
 Bien sûr exécutez le script. Il vous rappellera les informations à saisir dans Metabase pour le connecter à la base dans l’étape suivante.
+
+### Rappel de commandes PostgreSQL
+
+On peut, en cas de problème où si on veut tester que tout va bien, envoyer des commandes à PostgreSQL pour lister les bases, les tables dans une base, envoyer des requêtes simples pour afficher quelques lignes d’une table…
+
+Pour envoyer une commande (one-liner) à PostgreSQL on peut utiliser la commande `docker exec`. Voici une petite liste des commandes les plus courantes (on peut aussi envoyer des requêtes) :
+
+```bash
+# Lister les bases de données
+docker exec -it bi_postgres psql -U bi_user -d postgres -c "\l"
+
+# Lister les tables de la base "restaurant"
+docker exec -it bi_postgres psql -U bi_user -d restaurant -c "\dt"
+
+# Voir le schéma d'une table
+docker exec -it bi_postgres psql -U bi_user -d restaurant -c "\d tips"
+
+# Compter les lignes
+docker exec -it bi_postgres psql -U bi_user -d restaurant -c "SELECT COUNT(*) FROM tips;"
+
+# Voir quelques lignes
+docker exec -it bi_postgres psql -U bi_user -d restaurant -c "SELECT * FROM tips LIMIT 5;"
+
+# Mode interactif (plus pratique)
+docker exec -it bi_postgres psql -U bi_user -d restaurant
+# Puis taper les commandes SQL directement
+# Pour sortir : \q
+```
+
+> Rappel : de base, dans un terminal on lance PostgreSQL avec `psql`, on se connecte avec un nom d’utilisateur avec `psql -U <nom_utilisateur>`
+>
+> Ensuite on peut envoyer des commandes raccourcies grâce à un antislash `\` : `\l` ou`\list`  permet de lister les bases de données, `\c <nom_base>` de se connecter à une base,`\dt` les tables de la base à laquelle on est connecté, etc. Voici une petite liste : 
+>
+> ```
+> \l = liste des bases
+> \d = liste des tables
+> \du = liste des utilisateurs
+> \dn+ = lister les schemas et les droits
+> \q = quitter
+> \h = aide
+> USE <nom_base> = se connecter à la base <nom_base>
+> \c <nom_base> = se connecter à la base <nom_base>
+> SELECT version(); = version PostgreSQL
+> ```
+
+Parfois quand on veut investiguer un problème plus en profondeur on préfère se connecter de manière interactive (pour envoyer plusieurs commande à la suite, et pas juste envoyer une commande grâce à `docker exec` ). Dans ce cas on peut rentrer dans PostgreSQL dans le conteneur. Pour cela, on se connecte avec une commande `docker exec` sur un compte utilisateur de la base, et ensuite le prompt du terminal devient le prompt de PostgreSQL dans le conteneur, un peu comme avec une connexion SSH :
+
+```
+# Se connecter
+docker exec -it bi_postgres psql -U bi_user -d restaurant
+
+# Une fois connecté :
+\dt                          # Lister les tables
+\d tips                      # Schéma de la table tips
+SELECT * FROM tips LIMIT 5;  # Voir des données
+\q                           # Quitter
+```
 
 ## Partie 4 : Configuration de Metabase et premières requêtes
 
@@ -811,6 +869,7 @@ On peut toujours sauver son travail en faisant un dump des bases PostgreSQL :
 ## Pour aller plus loin
 
 - Recommencez cette procédure avec un jeu de données réelles : le fameux [Instacart par exemple](https://www.kaggle.com/datasets/psparks/instacart-market-basket-analysis) (la préparation des données sera plus complexe, il y a plusieurs tables, n’hésitez pas à explorer d’abord les données plus classiquement dans un notebook pour en prendre connaissance). Soyez prêt-e-s à me présenter votre dashboard le lundi 20 avril (note de participation).
-- Réaliser des dashboards plus élaborés (créez des filtres dynamiques dans vos dashboards, etc.), n’hésitez pas à explorer des ressources sur le net, tutoriels vidéos, etc.
+- Réaliser des dashboards plus élaborés (créez des filtres dynamiques dans vos dashboards, etc.), n’hésitez pas à explorer des ressources sur le net, tutoriels vidéos, etc. 
+- Jetez un œil à la capacité de Metabase d’envoyer des rapports automatiquement par mail (« [subscriptions](https://www.metabase.com/docs/latest/dashboards/subscriptions) »). Un serveur mail est configurée par défaut dans la version cloud de metabase, mais il faut le faire soit-même pour Metabase « self-hosted » comme nous l’avons fait. On peut, pour tester, utiliser un compte Gmail en définissant un mot de passe d’application dans votre compte Gmail et ensuite configurer Metabase pour utiliser le serveur SMTP de Gmail. Bien sûr en production il faudra utiliser d’autres méthodes, plus professionnelles.
 - Explorez les "Questions suggérées" de Metabase et les exemples de données proposées
-- Si les bases vue aujourd’hui sont bien assimilées, nous installerons [Apache Superset](https://superset.apache.org/) à la prochaine séance, et créerons un dashboard à partir d’une jeu de données bien plus complexe.
+- Si les bases vues aujourd’hui sont bien assimilées, nous installerons [Apache Superset](https://superset.apache.org/) à la prochaine séance, et créerons un dashboard à partir d’un jeu de données bien plus complexe.
