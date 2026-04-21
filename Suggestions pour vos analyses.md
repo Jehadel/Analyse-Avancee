@@ -1,3 +1,7 @@
+## Conseil pour le workflow
+
+![Workflow](./Images/Workflow.png)
+
 ## Suggestions pour vos analyses
 
 * Gérer les NaN (évident…)
