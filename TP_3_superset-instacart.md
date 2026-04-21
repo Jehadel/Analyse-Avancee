@@ -63,7 +63,24 @@ docker exec -it bi_postgres psql -U bi_user -d instacart -c "SELECT COUNT(*) FRO
 - Besoin de SQL Lab pour exploration
 - Customisation/embedding avancé
 
-### 1.2 Architecture de Superset
+**Pourquoi préférer de tels outils assez rigides plutôt qu’un bon vieux Streamlit qui permet un contrôle plus libre des dataviz ?**
+
+Il ne faut pas perdre de vue qu’une solution est créée pour répondre à certaines contraintes, notamment industrielles. Le terme « industriel » n’est pas usurpé par des outils tels que Superset, qui sont développés et mis en œuvre par des grands comptes ou des multinationales. Ces outils de dataviz ne se contentent pas de « juste » créer des graphiques ou des dashboards accessibles via son navigateur. Il faut prendre un peu de recul et ne pas s’imaginer que tout est comparable au fait de développer un petit dashboard en local pour afficher les données téléchargées sur Kaggle et stockée sur une petite base de quelques milliers de lignes servit par une API qui répond à une requête d’un utilisateur toutes les 10 minutes. 
+
+[Voici un article de 2021](https://medium.com/airbnb-engineering/supercharging-apache-superset-b1a2393278bd) d’Erik Ritter (Tech lead chez AirBnB à l’époque et aujourd’hui membre du staff technique d’OpenAI) sur l’utilisation de Superset à AirBnB. On y apprend qu’alors Superset servait, sur une base **hebdomadaire** :
+
+* 6 000 dashboards
+* 125 000 figures
+* 50 000 requêtes
+* pour 2 000 utilisateurs
+
+**Globalement en 2021 leur système gérait 100 000 tables, 200 000 figures et 14 000 dashboards. 25% des employés à AirBnB utilisent Superset.** On peut facilement imaginer que ce nombre n’a pu que croître depuis. Cette scalabilité implique la mise en place d’un système de cache (Redis), d’une optimisation du moteur de requête (Presto, Apache Druid) avec de nombreux jobs en tâche de fond (Airflow). Afficher un dashboard dans un navigateur demande l’exécution d’autant de requêtes en simultané que ce qu’il y a de figures, ce qui demande de contourner les limitations des navigateurs (qui limitent le nombre de requêtes simultanées, créant un goulot d’étranglement). Je paraphrase ici la présentation chiffrée d’Erick Nitter dans son article.
+
+Donc se dire que développer un dashboard sur stremalit se fait avec plus de facilité et de liberté, c’est comme comparer une presse hydraulique à un marteau, en trouvant qu’une presse n’a aucun intérêt car moins flexible dans son utilisation qu’un marteau ! Comme souvent ces jugements ridicules oublient que la différence se joue sur le contexte d’usage, conduisant à des comparaisons biaisées.
+
+Il est donc important, malgré les désagréments de devoir se conformer à une logique rigide et de ressentir sa liberté restreinte, de connaître ces outils qui sont des standards industriels. 
+
+### 1.2 Architecture (simplifiée) de Superset
 
 Contrairement à Metabase (un simple processus Python/Java), Superset nécessite plusieurs composants :
 
