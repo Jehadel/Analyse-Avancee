@@ -6,7 +6,7 @@ Ressource complémentaire : [requirements.txt](https://github.com/Jehadel/Analys
 - [TP 1](https://github.com/Jehadel/Analyse-Avancee/blob/main/TP_1_docker_metabase-FINAL.md) : conteneurs PostgreSQL, Metabase, découverte (premières dataviz et dashboard)
 - [TP 2](https://github.com/Jehadel/Analyse-Avancee/blob/main/TP_2_metabase-instacart.md) : import d’un dataset volumineux (Instacart) dans PostgreSQL, dashboard plus complexe, KPI
 - [TP 3](https://github.com/Jehadel/Analyse-Avancee/blob/main/TP_3_superset-instacart.md) : conteneur Superset,  connexion à PostgreSQL, découverte (dataviz et dashboard).
-Ressource complémentaire : [superset_config.py](https://github.com/Jehadel/Analyse-Avancee/blob/main/superset_config.py)
+Ressource nécessaire : [superset_config.py](https://github.com/Jehadel/Analyse-Avancee/blob/main/superset_config.py)
 - [Mini-projet / modalités d’évaluation](https://github.com/Jehadel/Analyse-Avancee/blob/main/Modalit%C3%A9s%20d%E2%80%99%C3%A9valuation.md)
 - [Suggestions pour le projet, workflow attendu](https://github.com/Jehadel/Analyse-Avancee/blob/main/Suggestions%20pour%20vos%20analyses.md)
 - [Créer un dashboard efficace](https://github.com/Jehadel/Analyse-Avancee/blob/main/Dahboarding.pdf)
