@@ -9,4 +9,5 @@ Ressource complémentaire : [requirements.txt](https://github.com/Jehadel/Analys
 Ressource complémentaire : [superset_config.py](https://github.com/Jehadel/Analyse-Avancee/blob/main/superset_config.py)
 - [Mini-projet / modalités d’évaluation](https://github.com/Jehadel/Analyse-Avancee/blob/main/Modalit%C3%A9s%20d%E2%80%99%C3%A9valuation.md)
 - [Suggestions pour le projet, workflow attendu](https://github.com/Jehadel/Analyse-Avancee/blob/main/Suggestions%20pour%20vos%20analyses.md)
+- [Créer un dashboard efficace](https://github.com/Jehadel/Analyse-Avancee/blob/main/Dahboarding.pdf)
 - [Grilles de co-évaluation](https://github.com/Jehadel/Analyse-Avancee/blob/main/Grille-Co-Evaluations-B3-AnalyseAvancee.xls) (pour la « répétition générale » évaluée par les pairs)
